@@ -54,11 +54,13 @@ def up_or_down():
         return True
     if input_ch == 44:
         return False
+    if input_ch == 115:
+        return None
     if input_ch == 3:
         exit_signal_handler()
-    print("bad key pressed!")
-    print("Press ',' if it is worse and '.' if it is better")
-    up_or_down()
+    print("Invalid key pressed: {}".format(input_ch))
+    print("Press ',' if it is worse and '.' if it is better (press 's' to skip if you haven't seen it). ")
+    return up_or_down()
 
 def rank_movies(letterboxd_watched, movie_rankings):
     ranked_movies = get_ranked_movie_set(movie_rankings)
@@ -67,22 +69,31 @@ def rank_movies(letterboxd_watched, movie_rankings):
             continue
         currently_ranking = watched['Name']
         print("--------------")
-        print("Ranking {}".format(currently_ranking))
+        print("Ranking {} ({})".format(currently_ranking, watched['Year']))
+        skip = False
         lo = 0
         hi = len(movie_rankings) - 1
         while lo <= hi:
-            mid = (lo + hi) / 2
+            mid = int((lo + hi) / 2)
             compare_with = movie_rankings[mid]
-            print("{} : is {} better or worse?".format(compare_with['Name'], currently_ranking))
+            print("{} ({}) : is {} better or worse?".format(compare_with['Name'],
+                                                            compare_with['Year'],
+                                                            currently_ranking))
             result = up_or_down()
+            if result == None:
+                skip = True
+                break
             if result:
                 lo = mid + 1
                 hi = hi
             else:
                 lo = lo
                 hi = mid - 1
-        print("Done ranking!")
-        movie_rankings.insert(lo, create_movie_ranking_row(watched))
+        if skip:
+            print("Skipping...")
+        else:
+            print("Done ranking!")
+            movie_rankings.insert(lo, create_movie_ranking_row(watched))
 
 
 
