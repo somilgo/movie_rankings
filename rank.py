@@ -2,46 +2,8 @@ import csv
 import os.path
 import sys
 import signal
+import get_char
 from functools import partial
-
-class _Getch:
-    """Gets a single character from standard input.  Does not echo to the
-screen."""
-    def __init__(self):
-        try:
-            self.impl = _GetchWindows()
-        except ImportError:
-            self.impl = _GetchUnix()
-
-    def __call__(self): return self.impl()
-
-
-class _GetchUnix:
-    def __init__(self):
-        import tty, sys
-
-    def __call__(self):
-        import sys, tty, termios
-        fd = sys.stdin.fileno()
-        old_settings = termios.tcgetattr(fd)
-        try:
-            tty.setraw(sys.stdin.fileno())
-            ch = sys.stdin.read(1)
-        finally:
-            termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
-        return ch
-
-
-class _GetchWindows:
-    def __init__(self):
-        import msvcrt
-
-    def __call__(self):
-        import msvcrt
-        return msvcrt.getch()
-
-
-getch = _Getch()
 
 def read_csv_as_dictionary(csv_file):
     with open(csv_file, 'r') as f:
@@ -81,13 +43,13 @@ def add_subparser(subparsers):
     foo_parser = subparsers.add_parser('rank', help=help, description=help)
     foo_parser.add_argument('-letterboxd-watched-file', required=True, help="Exported watched.csv from Letterboxd")
     foo_parser.add_argument('-movie-rankings-file', required=False,
-                            default="./movie-ratings.csv", help="State for storing movie ratings. If it doesn't exist, one will be created as \'movie-ratings.csv\'")
+                            default="./movie-rankings.csv", help="State for storing movie ratings. If it doesn't exist, one will be created as \'movie-ratings.csv\'")
 
 def get_ranked_movie_set(movie_rankings):
     return { ranking['Letterboxd URI'] for ranking in movie_rankings }
 
 def up_or_down():
-    input_ch = ord(getch())
+    input_ch = ord(get_char.getch())
     if input_ch == 46:
         return True
     if input_ch == 44:
