@@ -32,3 +32,7 @@ Date,Name,Year,Letterboxd URI,Ranking
 ```
 
 Disagree with my movie rankings? Let's see yours *insert inhaling face emoji*!
+
+## Coming Soon
+- Convert rankings into ratings using human-set markers an linear interpolation
+- Create a CSV to upload your generated ratings to Letterbox to share (screw your old ratings!)
