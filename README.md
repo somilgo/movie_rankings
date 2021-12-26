@@ -20,7 +20,7 @@ Ranking Get Out
 Inception : is Get Out better or worse?
 ```
 
-Press CTRL+C to exit and your rankings so far will be saved. Your rankings will be created in a movie-ratings.csv file in the current working directory by default:
+Press CTRL+C to exit and your rankings so far will be saved. Your rankings will be created in a movie-rankings.csv file in the current working directory by default:
 ```
 ❯ cat movie-rankings.csv
 Date,Name,Year,Letterboxd URI,Ranking
