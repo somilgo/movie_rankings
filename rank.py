@@ -67,7 +67,7 @@ def exit_and_save_rankings(movie_rankings, movie_rankings_file, *args):
         writer = csv.writer(f)
         writer.writerow(movie_rankings_header)
         ranking_counter = 0
-        for ranking in movie_rankings:
+        for ranking in reversed(movie_rankings):
             ranking_counter += 1
             ranking["Ranking"] = ranking_counter
             writer.writerow([ranking[col] for col in movie_rankings_header])
