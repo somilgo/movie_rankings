@@ -1,4 +1,4 @@
-# Somil's Fancy Movie Rater
+# Somil's Fancy Movie Ranker
 Rate movies with a total ordering rather than a 5-star or 10 point rating that loses relativity quickly. 
 
 Sure, a rating is easier to come up with than a ranking, but rankings are pretty easy too! To perfectly rank a new movie if you already have 1,000,000 movies in your collection takes 20 comparisons. If you're truly a movie buff... is that so much to ask?
