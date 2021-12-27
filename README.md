@@ -33,6 +33,17 @@ Date,Name,Year,Letterboxd URI,Ranking
 
 Disagree with my movie rankings? Let's see yours *insert inhaling face emoji*!
 
-## Coming Soon
-- Convert rankings into ratings using human-set markers an linear interpolation
-- Create a CSV to upload your generated ratings to Letterbox to share (screw your old ratings!)
+## Converting Rankings to Ratings and Importing to Letterboxd
+Now that you have rankings of all of your movies, you can create very accurate ratings as well. Just run the following which will ask you a series of questions to try to find the greatest lower bound for each star ranking:
+```
+❯ python3 movie_ranker.py convert_to_ratings
+Onward (2020) : is the worst 1-star movie better or worse than this movie?
+Legally Blonde (2001) : is the worst 1-star movie better or worse than this movie?
+Cars (2006) : is the worst 1-star movie better or worse than this movie?
+Mad Max: Fury Road (2015) : is the worst 1-star movie better or worse than this movie?
+Black Widow (2021) : is the worst 1-star movie better or worse than this movie?
+Captain America: Civil War (2016) : is the worst 1-star movie better or worse than this movie?
+Captain Marvel (2019) : is the worst 1-star movie better or worse than this movie?
+Captain America: Civil War is the worst 1-star movie.
+```
+Then, it will linearly interpolate between these base ratings using the rankings file from above to create accurate ratings. You can upload the resulting 'movie-ratings.csv' file to letterboxd. Enjoy!

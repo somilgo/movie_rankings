@@ -46,7 +46,7 @@ def add_subparser(subparsers):
 
 def command(movie_rankings_file, movie_ratings_file):
     movie_rankings = movie_ranking_io.read_or_create_movie_rankings(movie_rankings_file)
-    base_ratings = search_for_ratings(movie_rankings, [1, 2, 3, 4])
+    base_ratings = search_for_ratings(movie_rankings, [1, 2, 3, 4, 5])
     base_ratings.append((5,0))
     for movie_ranking in movie_rankings:
         current_ranking = int(movie_ranking['Ranking'])
